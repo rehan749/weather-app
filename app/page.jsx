@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function Home() {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState('');
+  const [weatherIcon, setWeatherIcon] = useState(null);
 
   const handleChange = (e) => {
     setCity(e.target.value);
@@ -20,10 +21,12 @@ export default function Home() {
     console.log("city nam:", data);
   };
 
-  // const reponse = async()=>{
-  //     const weather = await (`https://api.openweathermap.org/data/2.5/weather?q=${data}&appid={process.env.apiKey}&units=metric`)
-  //     console.log(weather.data);
-  //   }
+
+
+ // Get weather icon
+ const iconCode = weatherData.weather[0].icon;
+ const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+ setWeatherIcon(iconUrl);
 
     const getWeather = async (data) => {
       try {
@@ -68,6 +71,7 @@ export default function Home() {
  {/* Display weather data */}
  {weatherData && (
   <div>
+     <img src={weatherIcon} alt="Weather Icon" />
     <h1 className="font-bold">{weatherData.main.temp}°C</h1>
     <p> {weatherData.weather[0].description}</p>
     <p className="border-b"> {weatherData.name}, {weatherData.sys.country} </p>
