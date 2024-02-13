@@ -31,3 +31,6 @@ body {
     text-wrap: balance;
   }
 }
+.card input[type=text]{
+  color: black;
+}
