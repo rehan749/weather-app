@@ -1,94 +1,94 @@
 "use client";
 
-import axios from "axios";
-import { useState } from "react";
+import Date from "@/components/Date";
+import ForeCast from "@/components/foreCast";
+import { useState,useEffect } from "react";
 
-export default function Home() {
-  const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState('');
-  const [weatherIcon, setWeatherIcon] = useState(null);
+const weatherApp = () => {
 
-  const handleChange = (e) => {
-    setCity(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-
-    e.preventDefault();
-    const data = await getWeather(city)
-     // Prevent default form submission behavior
-    setWeatherData(data)
-    console.log("city nam:", data);
-  };
+const [city, setCity] = useState("lucknow");
+const [weatherData, setWeatherData] = useState('');
 
 
+const apiKey= "c9e4be29cb6580b6191588da600ad5d9";
 
- // Get weather icon
- const iconCode = weatherData.weather[0].icon;
- const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
- setWeatherIcon(iconUrl);
 
-    const getWeather = async (data) => {
-      try {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c9e4be29cb6580b6191588da600ad5d9&units=metric`);
-        console.log(response.data);
-        // Do something with the weather data here
-        return response.data; // Optionally return the data if you need to use it elsewhere
-      } catch (error) {
+    const getWeather = async()=>{
+       try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+        
+        if (!response.ok) {
+            throw new Error("Failed to fetch weather data");
+          }
+        const data = await response.json();
+        console.log(data);
+        setWeatherData(data);
+       } 
+       catch (error) {
         console.error('Error fetching weather data:', error);
-        // Handle error gracefully
-        return null;
-      }
-    };
-    
-
-
-    // Example usage
-   
-    // getWeather('London');
-  return (
-    <section className="flex align-middle justify-center h-screen mt-10">
-      <div className="title text-center">
-        <div className="card border-2 p-2 bg-blue-400">
-          <h1>Weather App</h1>
-
-          <form  onSubmit={handleSubmit}>
-            <input
-              type="text"
-              className="py-2 px-2 w-80"
-              name="city"
-              placeholder="enter city"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="button"
-              onClick={handleSubmit}
-              className="btn bg-red-500 py-2 px-2 mx-1 cursor-pointer"
-              value="search"
-            />
-          </form>
- {/* Display weather data */}
- {weatherData && (
-  <div>
-     <img src={weatherIcon} alt="Weather Icon" />
-    <h1 className="font-bold">{weatherData.main.temp}°C</h1>
-    <p> {weatherData.weather[0].description}</p>
-    <p className="border-b"> {weatherData.name}, {weatherData.sys.country} </p>
-
-<div className="flex justify-around">
-  {/* <p>Avg Temp:{}</p> */}
-  <p>Min Temp:{weatherData.main.temp_min}</p>
-  <p>   Max Temp:{weatherData.main.temp_max}</p>
-</div>
-
-    {/* Access other properties as needed */}
-  </div>
-)}
-          
-          {/* <p>{weatherData}</p> */}
-        </div>
-      </div>
-    </section>
-  );
+        setWeatherData(''); // Reset weather data in case of error
+       }
 }
+ 
+
+ 
+ const handleChange =(e)=>{
+   setCity(e.target.value);
+ }
+ const handleSubmit = (e)=>{
+    e.preventDefault();
+    getWeather(city)
+    //  console.log()
+ }
+
+  return (
+    <section>
+        <div className="container">
+
+     <div className="box">
+        <div className="searchcity">
+         <input type="text" className="sm:max-w-full w-80 py-2 px-3 text-base text-slate-900 placeholder:text-slate-600 outline-none"placeholder="Search City..." value={city} onChange={handleChange} />
+            <input type="button" className="mx-2 bg-red-600 py-2 px-3 rounded cursor-pointer text-white" value="search" onClick={handleSubmit} />
+        </div>
+
+
+        {weatherData ? (
+        <div className="weatherdata py-5">
+
+            <h2 className="font-bold text-4xl">{weatherData.name}, {weatherData.sys.country}</h2>
+            <Date />
+
+            <div className="temp">
+         <img className="m-auto" src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description}/>
+               
+               <h1 className="text-6xl font-bold">{Math.round(weatherData.main.temp)}°C</h1>
+               <p className="text-red-400 text-xl">{weatherData.weather[0].description}</p>
+                </div>   
+
+                <div className="weather-info flex justify-evenly">
+                    <div className="col">
+                         <p className="wind">{weatherData.wind.speed}m/s</p>
+                            <p>Wind speed</p>
+                            </div>
+                          
+                            <div className="col">
+                               
+                              <p className="humidity">{weatherData.main.humidity}%</p>
+                              <p>Humidity</p>
+                               </div>
+                                </div>
+
+                               <ForeCast city={city} apiKey={apiKey}/>
+            </div>
+            ): (
+                <p className="py-5 font-bold">data not found</p>
+            )}
+           
+           
+     </div>
+        </div>
+    </section>
+  )
+}
+
+export default weatherApp
