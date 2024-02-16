@@ -48,6 +48,19 @@ svg{
   display: inline;
 }
 
+.forecast .grid .days {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 5px rgba(0,0,0,.5);
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
 @media screen and (max-width: 480px){
 .searchcity input[type=text] {
     width: 60%;
