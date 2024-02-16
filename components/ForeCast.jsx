@@ -20,7 +20,7 @@ const ForeCast = ({city,apiKey}) => {
       };
   
       getforeCast(); // Call the function when the component mounts or when city or apiKey changes
-    }, [city, apiKey]);
+    }, []);
 
     if (error) {
       return <div>Error: {error}</div>;
@@ -32,7 +32,7 @@ const ForeCast = ({city,apiKey}) => {
       <h2 className='text-xl font-extrabold'>5-Day Forecast:</h2>
 
       {foreCast && (
-        <p>Temperature: {foreCast.main.temp} °C</p>
+        <p>Temperature: {foreCast.list[0].main.temp} °C</p>
       )}
      
     </section>
