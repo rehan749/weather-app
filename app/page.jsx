@@ -78,7 +78,7 @@ const apiKey= "c9e4be29cb6580b6191588da600ad5d9";
                                </div>
                                 </div>
 
-                               <ForeCast city={city} apiKey={apiKey}/>
+                                <ForeCast city={city} apiKey={apiKey} />
             </div>
             ): (
                 <p className="py-5 font-bold">data not found</p>
