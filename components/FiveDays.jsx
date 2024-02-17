@@ -41,14 +41,14 @@ const FiveDays = ({city , apiKey}) => {
         <p></p>
         <div className="grid grid-cols-5 gap-3">
           <div className='days'> 
-          <p>Temperature: {Math.round(foreCast.list[8].main.temp)} °C</p>
+          <p>Temp <br /> {Math.round(foreCast.list[8].main.temp)} °C</p>
           </div>
           <div className='days'>
           
-          <p>Temperature: {Math.round(foreCast.list[16].main.temp)} °C</p></div>
-          <div className='days'><p>Temperature: {Math.round(foreCast.list[24].main.temp)} °C</p></div>
-          <div className='days'><p>Temperature: {Math.round(foreCast.list[32].main.temp)} °C</p></div>
-          <div className='days'><p>Temperature: {Math.round(foreCast.list[39].main.temp)} °C</p></div>
+          <p>Temp <br /> {Math.round(foreCast.list[16].main.temp)} °C</p></div>
+          <div className='days'><p>Temp <br /> {Math.round(foreCast.list[24].main.temp)} °C</p></div>
+          <div className='days'><p>Temp <br /> {Math.round(foreCast.list[32].main.temp)} °C</p></div>
+          <div className='days'><p>Temp <br /> {Math.round(foreCast.list[39].main.temp)} °C</p></div>
           
          
         </div>
