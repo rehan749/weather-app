@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Date from "@/components/Date";
-import ForeCast from "@/components/foreCast";
+
 import FiveDays from '@/components/FiveDays';
 
 const WeatherApp = () => {
