@@ -19,6 +19,7 @@
 body {
   
   background-image: url("../public/bg.png");
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 @layer utilities {
   .text-balance {
