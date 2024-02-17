@@ -20,6 +20,8 @@ const ForeCast = ({ city, apiKey }) => {
       }
     }
 
+    
+
   useEffect(() => {
      getForeCast();
   }, []);
@@ -34,11 +36,14 @@ const ForeCast = ({ city, apiKey }) => {
       {foreCast && (
         <>
       <p>City name: {foreCast.city.name}</p>
-        
+        <p></p>
         <div className="grid grid-cols-5 gap-3">
-          <div className='days'> <p>Temperature: {Math.round(foreCast.list[8].main.temp)} °C</p>
+          <div className='days'> 
+          <p>Temperature: {Math.round(foreCast.list[8].main.temp)} °C</p>
           </div>
-          <div className='days'><p>Temperature: {Math.round(foreCast.list[16].main.temp)} °C</p></div>
+          <div className='days'>
+          
+          <p>Temperature: {Math.round(foreCast.list[16].main.temp)} °C</p></div>
           <div className='days'><p>Temperature: {Math.round(foreCast.list[24].main.temp)} °C</p></div>
           <div className='days'><p>Temperature: {Math.round(foreCast.list[32].main.temp)} °C</p></div>
           <div className='days'><p>Temperature: {Math.round(foreCast.list[39].main.temp)} °C</p></div>

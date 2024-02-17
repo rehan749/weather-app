@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Date from "@/components/Date";
 import ForeCast from "@/components/foreCast";
+import FiveDays from '@/components/FiveDays';
 
 const WeatherApp = () => {
   const [city, setCity] = useState("Lucknow");
   const [weatherData, setWeatherData] = useState(null);
 
-  const apiKey = "c9e4be29cb6580b6191588da600ad5d9";
+  const apiKey = "1ff4cf5b8f158442c5c6e1c087c0168e";
 
   const getWeather = async () => {
     try {
@@ -82,7 +83,8 @@ const WeatherApp = () => {
                   <p>Humidity</p>
                 </div>
               </div>
-              <ForeCast city={city} apiKey={apiKey} />
+              {/* <ForeCast city={city} apiKey={apiKey} /> */}
+              <FiveDays  city={city} apiKey={apiKey} />
             </div>
           ) : (
             <p className="py-5 font-bold">Data not found</p>
